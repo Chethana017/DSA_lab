@@ -1,14 +1,10 @@
-n=int(input("Enter a number: "))
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
-def factorial(n):
-    if n == 0 or n == 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
+n = int(input("Enter number: "))
 
-if n < 0:
-    print("Factorial is not defined for negative numbers.")
-elif n == 0:
-    print("The factorial of 0 is 1.")
-else:
-    print("The number of ways the parcels can be arranged is",factorial(n))
+print("Fibonacci Series:")
+for i in range(n):
+    print(fibonacci(i), end=" ")

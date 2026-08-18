@@ -3,15 +3,15 @@ s_id=int(input("Enter Employee ID from(101-107) to search:"))
 
 def search_employee(e_id,s_id,i):
     if i==len(e_id):
-        return False
+        return -1
 
     if e_id[i]==s_id:
-        return True
+        return i
 
     return search_employee(e_id, s_id, i + 1)
 
-
-if search_employee(e_id, s_id, 0):
-    print("Employee found.")
+result=search_employee(e_id,s_id, 0)
+if result != -1:
+    print("Employee ID found at position:", result)
 else:
     print("Employee not found.")

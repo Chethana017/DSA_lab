@@ -1,10 +1,10 @@
-p=int(input("Enter the principle growth factor value:"))
-n=int(input("Enter the number of years:"))
-
-def ci(p, n):
-    if n>0:
-        return p*ci(p, n-1)
-    else:
+def power(p, n):
+    if n == 0:
         return 1
+    else:
+        return p * power(p, n - 1)
 
-print("The compound interest is:", ci(p, n))
+p = float(input("Enter the principal growth factor: "))
+n = int(input("Enter the number of years: "))
+result = power(p, n)
+print("Power =", result)
