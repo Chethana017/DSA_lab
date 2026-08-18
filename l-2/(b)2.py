@@ -1,6 +1,6 @@
-arr=[20,50,70,40,30,10,60]
+arr = [20, 50, 70, 40, 30, 10, 60]
 
-key = int(input("Enter the element to search [10-70]: "))
+key = int(input("Enter element to search: "))
 
 arr.sort()
 
@@ -8,20 +8,21 @@ print("Sorted array:", arr)
 
 low = 0
 high = len(arr) - 1
-position = -1
+found = 0
 
 while low <= high:
     mid = (low + high) // 2
 
     if arr[mid] == key:
-        position = mid
+        print("Element found at position", mid + 1)
+        found = 1
         break
+
     elif key < arr[mid]:
         high = mid - 1
+
     else:
         low = mid + 1
 
-if position != -1:
-    print("Element found at position", position + 1)
-else:
+if found == 0:
     print("Element not found")
