@@ -1,0 +1,29 @@
+class queue:
+
+    def init(self, size):
+        self.size = None
+        self.next = [None] * size
+        self.front = -1
+        self.rear = -1
+
+    def enqueue(self, x):
+        if self.rear == self.size-1:
+            print("Queue Overflow")
+        else:
+            if self.front == -1:
+                self.front = 0
+            self.rear += 1
+            self.next[self.rear] = x
+            print(f"{x} inserted into the queue")
+
+
+q = queue()
+while True:
+    print("1.Enqueue")
+    ch = int(input("Enter your choice:"))
+    if ch == 1:
+        item = int(input("Enter element:"))
+        q.enqueue(item)
+    else:
+        print("Invalid Choice")
+        break
