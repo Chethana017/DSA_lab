@@ -197,7 +197,7 @@ while True:
         data=int(input("Enter the data to be deleted:"))
         root=delete(root,data)
     elif choice==9:
-        print("Number of nodes:",count_nodes)
+        print("Number of nodes:",count_nodes(root))
     elif choice==10:
         print("Number of leaf nodes:",count_leaf)
     elif choice==11:
