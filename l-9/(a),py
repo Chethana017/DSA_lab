@@ -1,0 +1,218 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+# Insert a node
+def insert(root,x):
+    if root is None:
+        return Node(x)
+    if x<root.data:
+        root.left=insert(root.left,x)
+    elif x>root.data:
+        root.right=insert(root.right,x)
+    else:
+        print("Duplicate value is not allowed")
+    return root
+# Preorder Traversal
+def Preorder(root):
+    if root is None:
+        return
+    print(root.data,end=" ")
+    Preorder(root.left)
+    Preorder(root.right)
+# Inorder Traversal
+def Inorder(root):
+    if root is None:
+        return
+    Inorder(root.left)
+    print(root.data,end=" ")
+    Inorder(root.right)
+# Postorder Traversal
+def Postorder(root):
+    if root is None:
+        return
+    Postorder(root.left)
+    Postorder(root.right)
+    print(root.data,end=" ")
+# Find Minimum
+def find_min(root):
+    if root is None:
+        return None
+    while root.left is not None:
+        root=root.left
+    return root
+# Find Maximum
+def find_max(root):
+    if root is None:
+        return None
+    while root.right is not None:
+        root=root.right
+    return root
+# Search a node
+def search(root,data):
+    if root is None:
+        return None
+    if data<root.data:
+        return search(root.left,data)
+    elif data>root.data:
+        return search(root.right,data)
+    else:
+        return root
+# Count total nodes
+def count_nodes(root):
+    if root is None:
+        return 0
+    return count_nodes(root.left)+count_nodes(root.right)+1
+# Count leaf nodes
+def count_leaf(root):
+    if root is None:
+        return 0
+    if root.left is None and root.right is None:
+        return 1
+    return count_leaf(root.left)+count_leaf(root.right)
+# Count internal nodes
+def count_internal(root):
+    if root is None:
+        return 0
+    if root.left is None and root.right is None:
+        return 0
+    return count_internal(root.left)+count_internal(root.right)+1
+# Height of tree
+def height(root):
+    if root is None:
+        return -1
+    return max(height(root.left),height(root.right))+1
+# Delete a node
+def delete(root,x):
+    if root is None:
+        return None
+    if x<root.data:
+        root.left=delete(root.left,x)
+    elif x>root.data:
+        root.right=delete(root.right,x)
+    else:
+        # No children
+        if root.left is None and root.right is None:
+            return None
+        # Only right child
+        elif root.left is None:
+            return root.right
+        # Only left child
+        elif root.right is None:
+            return root.left
+        # Two children
+        successor=find_min(root.right)
+        root.data=successor.data
+        root.right=delete(root.right,successor.data)
+    return root
+# Level-order Traversal
+def level_order(root):
+    if root is None:
+        return
+    queue=[root]
+    while queue:
+        node=queue.pop(0)
+        print(node.data,end=" ")
+        if node.left is not None:
+            queue.append(node.left)
+        if node.right is not None:
+            queue.append(node.right)
+# Display tree level by level
+def display(root,level=0):
+    if root is None:
+        return
+    queue=[(root,0)]
+    while queue:
+        node,current_level=queue.pop(0)
+        if current_level==level:
+            print(node.data,end=" ")
+        if node.left is not None:
+            queue.append((node.left,current_level+1))
+        if node.right is not None:
+            queue.append((node.right,current_level+1))
+# Menu-driven Program
+root = None
+while True:
+    print("1. Insert")
+    print("2. Pre-Order Traversal")
+    print("3. In-Order Traversal")
+    print("4. Post-Order Traversal")
+    print("5. Find Minimum")
+    print("6. Find Maximum")
+    print("7. Search")
+    print("8. Delete")
+    print("9. Count Number of Nodes")
+    print("10. Count Number of Leaves")
+    print("11. Count Number of Internal Nodes")
+    print("12. Height of Tree")
+    print("13. Level-Order Traversal")
+    print("14. Exit")
+    choice=int(input("Enter your choice:"))
+    if choice==1:
+        data=int(input("Enter the data to be inserted:"))
+        root=insert(root,data)
+        print("Element inserted successfully")
+    elif choice==2:
+        print("Preorder Traversal:",end="")
+        if root is None:
+            print("Tree is Empty")
+        else:
+            Preorder(root)
+            print()
+    elif choice==3:
+        print("Inorder Traversal:",end="")
+        if root is None:
+            print("Tree is Empty")
+        else:
+            Inorder(root)
+            print()
+    elif choice==4:
+        print("Postorder Traversal:",end="")
+        if root is None:
+            print("Tree is Empty")
+        else:
+            Postorder(root)
+            print()
+    elif choice==5:
+        node=find_min(root)
+        if node is None:
+            print("Tree is Empty")
+        else:
+            print("Minimum element:",node.data)
+    elif choice==6:
+        node=find_max(root)
+        if node is None:
+            print("Tree is Empty")
+        else:
+            print("Maximum element:",node.data)
+    elif choice==7:
+        data=int(input("Enter the data to be searched:"))
+        node=search(root,data)
+        if node is None:
+            print("Element",data,"is not found")
+        else:
+            print("Element",data,"is found")
+    elif choice==8:
+        data=int(input("Enter the data to be deleted:"))
+        root=delete(root,data)
+    elif choice==9:
+        print("Number of nodes:",count_nodes)
+    elif choice==10:
+        print("Number of leaf nodes:",count_leaf)
+    elif choice==11:
+        print("Number of internal nodes:",count_internal)
+    elif choice==12:
+        print("Height of BST:",height(root))
+    elif choice==13:
+        print("Level order Traversal:",end="")
+        if root is None:
+            print("Tree is Empty")
+        else:
+            level_order(root)
+            print()
+    elif choice==14:
+        print("Program terminated.")
+        break
+    else:
+        print("Enter a valid choice.")
